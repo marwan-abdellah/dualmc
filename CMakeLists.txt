@@ -1,9 +1,17 @@
 cmake_minimum_required(VERSION 3.9)
 project (dualmc)
 
+set (CMAKE_CXX_STANDARD 11)
+
 include_directories("${CMAKE_SOURCE_DIR}/include/")
 
 set(EXAMPLE_APP_SOURCES
+    include/dualmc.h
+    include/dualmc.cpp
+    include/vertex.h
+    include/quad.h
+    include/edges.h
+    include/tables.h
     apps/example/example.cpp
     apps/example/main.cpp
 )

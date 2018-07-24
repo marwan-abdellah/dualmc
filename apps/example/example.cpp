@@ -150,20 +150,22 @@ void DualMCExample::computeSurface(float const iso, bool const generateSoup, boo
     
     // measure extraction time
     high_resolution_clock::time_point const startTime = high_resolution_clock::now();
-    
-    // construct iso surface
-    if(volume.bitDepth == 8) {
-        dualmc::DualMC<uint8_t> builder;
-        builder.build(&volume.data.front(), volume.dimX, volume.dimY, volume.dimZ,
-            iso * std::numeric_limits<uint8_t>::max(), generateManifold, generateSoup, vertices, quads);
-    } else if(volume.bitDepth == 16) {
-        dualmc::DualMC<uint16_t> builder;
-        builder.build((uint16_t const*)&volume.data.front(), volume.dimX, volume.dimY, volume.dimZ,
-            iso * std::numeric_limits<uint16_t>::max(), generateManifold, generateSoup, vertices, quads);
-    } else {
-        std::cerr << "Invalid volume bit depth" << std::endl;
-        return;
-    }
+
+    dualmc::DualMC builder;
+    builder.build(&volume.data.front(), volume.dimX, volume.dimY, volume.dimZ,
+        iso * std::numeric_limits<uint8_t>::max(), generateManifold, generateSoup, vertices, quads);
+
+//    // construct iso surface
+//    if(volume.bitDepth == 8) {
+
+//    } else if(volume.bitDepth == 16) {
+//        dualmc::DualMC<uint16_t> builder;
+//        builder.build((uint16_t const*)&volume.data.front(), volume.dimX, volume.dimY, volume.dimZ,
+//            iso * std::numeric_limits<uint16_t>::max(), generateManifold, generateSoup, vertices, quads);
+//    } else {
+//        std::cerr << "Invalid volume bit depth" << std::endl;
+//        return;
+//    }
         
     high_resolution_clock::time_point const endTime = high_resolution_clock::now();
     duration<double> const diffTime = duration_cast<duration<double>>(endTime - startTime);
