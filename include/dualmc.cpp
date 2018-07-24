@@ -67,7 +67,7 @@ int DualMC::_getDualPointCode( const int32_t x, const int32_t y, const int32_t z
     int cubeCode = _getCellCode( x, y, z, isoValue );
 
     // Is manifold dual marching cubes desired?
-    if(generateManifold)
+    if(_generateManifold)
     {
         // The Manifold Dual Marching Cubes approach from Rephael Wenger as
         // described in chapter 3.3.5 of his book "Isosurfaces: Geometry,
@@ -349,7 +349,7 @@ void DualMC::build(const uint8_t* data,
     this->_volumeDimensions[1] = y;
     this->_volumeDimensions[2] = z;
     this->_volumeGrid = data;
-    this->generateManifold = generateManifold;
+    this->_generateManifold = generateManifold;
 
     // Clear vertices and quad indices
     vertices.clear();
